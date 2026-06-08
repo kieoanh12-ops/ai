@@ -1,1 +1,466 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronunciation App - A Long and Healthy Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1e293b;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Bộ lọc mức độ */
+        .filter-zone {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-filter {
+            background: #f1f5f9;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-filter.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Khung hiển thị từ vựng */
+        .vocab-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .word-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #cbd5e1;
+            font-size: 16px;
+            font-weight: 600;
+            color: #334155;
+            outline: none;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        /* Hình ảnh minh họa */
+        .image-container {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: #e2e8f0;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s;
+        }
+
+        .word-info {
+            margin-top: 10px;
+        }
+
+        .target-word {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f172a;
+            text-transform: lowercase;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .level-easy { background: #dcfce7; color: #16a34a; }
+        .level-hard { background: #ffe4e6; color: #dc2626; }
+
+        .ipa {
+            font-size: 16px;
+            color: #2563eb;
+            font-weight: 500;
+            margin: 6px 0;
+        }
+
+        .meaning {
+            font-size: 14px;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        /* Khu vực điều khiển âm thanh */
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .btn-circle {
+            background: #f1f5f9;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .btn-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-sample { background: #e0f2fe; }
+        .btn-sample svg { fill: #0369a1; }
+        .btn-playback { background: #fef3c7; }
+        .btn-playback svg { fill: #d97706; }
+        .btn-playback:disabled { background: #f1f5f9; cursor: not-allowed; opacity: 0.5; }
+        .btn-playback:disabled svg { fill: #94a3b8; }
+
+        .btn-circle svg { width: 22px; height: 22px; }
+
+        /* Nút nói */
+        .action-zone {
+            margin: 25px 0 15px 0;
+        }
+
+        .btn-record {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 15px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-record:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .btn-record.recording {
+            background: #ef4444;
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        /* Khung kết quả */
+        .result-box {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 15px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .score {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .user-transcript {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .user-transcript span {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .perfect { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+        .good { background: #fef9c3; color: #a16207; border: 1px solid #fef08a; }
+        .try-again { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Pronunciation Practice</h1>
+    <p class="subtitle">Chủ đề: A Long and Healthy Life (Tiếng Anh 11 Global Success)</p>
+
+    <div class="filter-zone">
+        <button class="btn-filter active" onclick="filterWords('all')">Tất cả</button>
+        <button class="btn-filter" onclick="filterWords('easy')">Dễ</button>
+        <button class="btn-filter" onclick="filterWords('hard')">Khó</button>
+    </div>
+
+    <div class="vocab-card">
+        <select id="wordSelector" class="word-select" onchange="renderCurrentWord()">
+            <option value="longevity" data-level="hard" data-ipa="/lɒnˈdʒev.ə.ti/" data-meaning="Tuổi thọ" data-img="https://images.unsplash.com/photo-1447452001602-7090c7ab2db3?w=600&auto=format&fit=crop&q=60">longevity</option>
+            <option value="immune system" data-level="hard" data-ipa="/ɪˈmjuːn ˌsɪs.təm/" data-meaning="Hệ miễn dịch" data-img="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&auto=format&fit=crop&q=60">immune system</option>
+            <option value="infectious disease" data-level="hard" data-ipa="/ɪnˈfek.ʃəs dɪˈziːz/" data-meaning="Bệnh truyền nhiễm" data-img="https://images.unsplash.com/photo-1584634731339-252c581abfc5?w=600&auto=format&fit=crop&q=60">infectious disease</option>
+            <option value="preservative" data-level="hard" data-ipa="/prɪˈzɜː.və.tɪv/" data-meaning="Chất bảo quản" data-img="https://images.unsplash.com/photo-1372335122176-a19363df023c?w=600&auto=format&fit=crop&q=60">preservative</option>
+            <option value="disinfectant" data-level="hard" data-ipa="/ˌdɪs.ɪnˈfek.tənt/" data-meaning="Chất khử trùng" data-img="https://images.unsplash.com/photo-1584483766114-2cea6facdf57?w=600&auto=format&fit=crop&q=60">disinfectant</option>
+            <option value="vaccine" data-level="easy" data-ipa="/ˈvæk.siːn/" data-meaning="Vắc-xin" data-img="https://images.unsplash.com/photo-1618961734760-466979ce35b0?w=600&auto=format&fit=crop&q=60">vaccine</option>
+            <option value="treatment" data-level="easy" data-ipa="/ˈtriːt.mənt/" data-meaning="Sự điều trị, liều thuốc" data-img="https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=600&auto=format&fit=crop&q=60">treatment</option>
+            <option value="bacteria" data-level="easy" data-ipa="/bækˈtɪə.ri.ə/" data-meaning="Vi khuẩn" data-img="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&auto=format&fit=crop&q=60">bacteria</option>
+            <option value="nutritious" data-level="easy" data-ipa="/njuːˈtrɪʃ.əs/" data-meaning="Bổ dưỡng, giàu dinh dưỡng" data-img="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&auto=format&fit=crop&q=60">nutritious</option>
+            <option value="exercise" data-level="easy" data-ipa="/ˈek.sə.saɪz/" data-meaning="Tập thể dục" data-img="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=60">exercise</option>
+            <option value="antibiotics" data-level="hard" data-ipa="/ˌæn.ti.baɪˈɒt.ɪks/" data-meaning="Thuốc kháng sinh" data-img="https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&auto=format&fit=crop&q=60">antibiotics</option>
+            <option value="life expectancy" data-level="hard" data-ipa="/ˈlaɪf ɪkˌspek.tən.si/" data-meaning="Tuổi thọ kỳ vọng" data-img="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&auto=format&fit=crop&q=60">life expectancy</option>
+        </select>
+
+        <div class="image-container">
+            <img id="wordImage" src="" alt="word illustration">
+        </div>
+
+        <div class="word-info">
+            <span id="levelBadge" class="level-badge"></span>
+            <div id="targetWord" class="target-word">---</div>
+            <div id="wordIpa" class="ipa">---</div>
+            <div id="wordMeaning" class="meaning">---</div>
+        </div>
+
+        <div class="audio-controls">
+            <button class="btn-circle btn-sample" onclick="speakTargetWord()" title="Nghe phát âm mẫu (UK/US)">
+                <svg viewBox="0 0 24 24"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M11,21L6,16H2V8H6L11,3V21Z"/></svg>
+            </button>
+            <button id="playbackBtn" class="btn-circle btn-playback" onclick="playUserVoice()" title="Nghe lại phát âm của bạn" disabled>
+                <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5V7.5L16,12L10,16.5Z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="action-zone">
+        <button id="recordBtn" class="btn-record" onclick="toggleListening()">Bắt đầu nói</button>
+    </div>
+
+    <div id="resultBox" class="result-box">
+        <div id="scoreText" class="score">0%</div>
+        <div class="user-transcript">Bạn đã phát âm: <span id="spokenText">...</span></div>
+    </div>
+</div>
+
+<script>
+    const wordSelector = document.getElementById('wordSelector');
+    const targetWordText = document.getElementById('targetWord');
+    const wordIpaText = document.getElementById('wordIpa');
+    const wordMeaningText = document.getElementById('wordMeaning');
+    const levelBadge = document.getElementById('levelBadge');
+    const wordImage = document.getElementById('wordImage');
+    const recordBtn = document.getElementById('recordBtn');
+    const playbackBtn = document.getElementById('playbackBtn');
+    const resultBox = document.getElementById('resultBox');
+    const scoreText = document.getElementById('scoreText');
+    const spokenText = document.getElementById('spokenText');
+
+    // Lưu trữ toàn bộ các option từ ban đầu để phục vụ bộ lọc phân loại
+    const allWordOptions = Array.from(wordSelector.options);
+
+    // Cấu hình Web Speech API nhận diện giọng nói
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition;
+    let isRecording = false;
+    let lastRecordedUtterance = ""; // Lưu lại chuỗi để giả lập tính năng nghe lại phát âm
+
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-US'; // Ép chuẩn tiếng Anh giọng Mỹ
+        recognition.interimResults = false;
+
+        recognition.onstart = () => {
+            isRecording = true;
+            recordBtn.textContent = "Đang lắng nghe...";
+            recordBtn.classList.add('recording');
+            resultBox.style.display = 'none';
+        };
+
+        recognition.onresult = (event) => {
+            const result = event.results[0][0].transcript.toLowerCase().trim();
+            const target = targetWordText.textContent.toLowerCase().trim();
+            
+            lastRecordedUtterance = event.results[0][0].transcript;
+            spokenText.textContent = `"${event.results[0][0].transcript}"`;
+            playbackBtn.disabled = false; // Kích hoạt nút nghe lại sau khi có dữ liệu nói
+
+            calculateScore(result, target);
+        };
+
+        recognition.onerror = () => { stopListening(); };
+        recognition.onend = () => { stopListening(); };
+    } else {
+        alert("Trình duyệt không hỗ trợ API nhận diện giọng nói. Hãy dùng Google Chrome!");
+        recordBtn.disabled = true;
+    }
+
+    // Phân loại từ vựng Dễ/Khó
+    function filterWords(level) {
+        // Cập nhật trạng thái nút bấm
+        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Xóa danh sách cũ
+        wordSelector.innerHTML = "";
+
+        // Lọc và thêm lại các option thỏa mãn điều kiện
+        allWordOptions.forEach(option => {
+            if (level === 'all' || option.getAttribute('data-level') === level) {
+                wordSelector.appendChild(option);
+            }
+        });
+
+        // Cập nhật giao diện hiển thị từ đầu tiên trong danh sách sau khi lọc
+        renderCurrentWord();
+    }
+
+    // Hiển thị dữ liệu của từ vựng đang chọn lên màn hình
+    function renderCurrentWord() {
+        if(wordSelector.options.length === 0) return;
+
+        const selectedOption = wordSelector.options[wordSelector.selectedIndex];
+        targetWordText.textContent = selectedOption.value;
+        wordIpaText.textContent = selectedOption.getAttribute('data-ipa');
+        wordMeaningText.textContent = selectedOption.getAttribute('data-meaning');
+        wordImage.src = selectedOption.getAttribute('data-img');
+
+        // Gắn tag độ khó dễ
+        const level = selectedOption.getAttribute('data-level');
+        levelBadge.textContent = level === 'easy' ? 'Mức độ: Dễ' : 'Mức độ: Khó';
+        levelBadge.className = `level-badge level-${level}`;
+
+        // Reset trạng thái tương tác trước đó
+        resultBox.style.display = 'none';
+        playbackBtn.disabled = true;
+        lastRecordedUtterance = "";
+        stopListening();
+    }
+
+    // Điều khiển micro ghi âm
+    function toggleListening() {
+        if (isRecording) { stopListening(); } else { recognition.start(); }
+    }
+
+    function stopListening() {
+        if (isRecording) {
+            recognition.stop();
+            isRecording = false;
+            recordBtn.textContent = "Bắt đầu nói";
+            recordBtn.classList.remove('recording');
+        }
+    }
+
+    // Phát âm chuẩn mẫu (Text to Speech - en-US)
+    function speakTargetWord() {
+        const text = targetWordText.textContent;
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = window.speechSynthesis.getVoices();
+        const usVoice = voices.find(v => v.lang === 'en-US' || v.lang.includes('en_US'));
+        if (usVoice) utterance.voice = usVoice;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Tính năng nghe lại phát âm bạn vừa đọc
+    function playUserVoice() {
+        if (!lastRecordedUtterance) return;
+        const utterance = new SpeechSynthesisUtterance(lastRecordedUtterance);
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Thuật toán so khớp chấm điểm phát âm tương đối
+    function calculateScore(userWord, targetWord) {
+        resultBox.style.display = 'block';
+        resultBox.className = 'result-box'; 
+
+        const cleanUser = userWord.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+        const cleanTarget = targetWord.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+
+        if (cleanUser === cleanTarget) {
+            scoreText.textContent = "Chính xác hoàn hảo! 100%";
+            resultBox.classList.add('perfect');
+        } else if (cleanTarget.includes(cleanUser) || cleanUser.includes(cleanTarget)) {
+            scoreText.textContent = "Phát âm tạm ổn! 75%";
+            resultBox.classList.add('good');
+        } else {
+            scoreText.textContent = "Chưa chính xác! 40%";
+            resultBox.classList.add('try-again');
+        }
+    }
+
+    // Chạy render lần đầu khi tải trang
+    window.speechSynthesis.onvoiceschanged = () => {};
+    renderCurrentWord();
+</script>
+
+</body>
+</html>
