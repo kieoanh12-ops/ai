@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -10,37 +9,47 @@
 </head>
 <body class="bg-slate-50 font-sans min-h-screen flex flex-col">
 
+    <!-- Header -->
     <header class="bg-blue-600 text-white py-6 shadow-md text-center">
         <h1 class="text-2xl md:text-3xl font-bold tracking-wide">ENGLISH PRONUNCIATION PRACTICE</h1>
         <p class="text-blue-100 mt-1">Unit 1: A Long and Healthy Life (Global Success 11)</p>
     </header>
 
+    <!-- Main Content -->
     <main class="flex-1 max-w-5xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         
+        <!-- Left Sidebar: Word List -->
         <div class="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 flex flex-col h-[600px]">
             <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-book text-blue-500"></i> Danh sách từ vựng
             </h2>
             
+            <!-- Filter Tabs -->
             <div class="flex gap-2 mb-4 bg-slate-100 p-1 rounded-xl text-sm font-medium">
                 <button onclick="filterWords('all')" id="btn-all" class="flex-1 py-2 rounded-lg text-center bg-white text-blue-600 shadow-xs cursor-pointer">Tất cả</button>
                 <button onclick="filterWords('easy')" id="btn-easy" class="flex-1 py-2 rounded-lg text-center text-slate-600 hover:text-slate-800 cursor-pointer">Dễ</button>
                 <button onclick="filterWords('hard')" id="btn-hard" class="flex-1 py-2 rounded-lg text-center text-slate-600 hover:text-slate-800 cursor-pointer">Khó</button>
             </div>
 
+            <!-- List Container -->
             <div id="word-list" class="flex-1 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
-                </div>
+                <!-- Words will be injected here by JS -->
+            </div>
         </div>
 
+        <!-- Right Workspace: Practice Area -->
         <div class="md:col-span-2 bg-white rounded-2xl shadow-sm p-6 border border-slate-100 flex flex-col justify-between min-h-[550px]">
             
+            <!-- Word Display & Image -->
             <div class="text-center flex-1 flex flex-col items-center justify-center my-2">
                 <span id="word-difficulty" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2"></span>
                 <h2 id="current-word" class="text-4xl md:text-5xl font-black text-slate-800 tracking-tight mb-0.5">Select a word</h2>
                 <p id="current-ipa" class="text-blue-600 font-mono text-base md:text-lg mb-1 font-medium tracking-wide"></p>
                 <p id="current-meaning" class="text-slate-500 italic text-base mb-3"></p>
                 
-                <div class="w-44 h-28 md:w-56 md:h-36 rounded-xl overflow-hidden bg-slate-100 shadow-inner mb-4 flex items-center justify-center border border-slate-200 relative">
+                <!-- Word Image -->
+                <div class="w-48 h-32 md:w-64 md:h-40 rounded-xl overflow-hidden bg-slate-100 shadow-inner mb-4 flex items-center justify-center border border-slate-200 relative">
+                    <!-- Loading spinner -->
                     <div id="image-loading" class="absolute inset-0 flex items-center justify-center bg-slate-100 hidden">
                         <i class="fa-solid fa-circle-notch fa-spin text-2xl text-blue-400"></i>
                     </div>
@@ -49,6 +58,7 @@
                 </div>
             </div>
 
+            <!-- Scoring and Feedback -->
             <div class="text-center mb-4 min-h-[110px] flex items-center justify-center">
                 <div id="score-container" class="hidden inline-flex flex-col items-center">
                     <div id="score-circle" class="w-20 h-20 rounded-full border-4 flex items-center justify-center text-2xl font-black mb-1 animate-bounce">
@@ -59,6 +69,7 @@
                 </div>
             </div>
 
+            <!-- Next Button Area -->
             <div class="text-center mb-6">
                 <button onclick="nextWord()" class="inline-flex items-center gap-2 px-6 py-2.5 bg-slate-800 text-white font-bold text-sm rounded-xl hover:bg-slate-700 active:scale-95 transition shadow-md cursor-pointer">
                     <span>Câu tiếp theo</span>
@@ -66,19 +77,23 @@
                 </button>
             </div>
 
+            <!-- Interactive Controls -->
             <div class="border-t border-slate-100 pt-6">
                 <div class="grid grid-cols-3 gap-4 max-w-md mx-auto">
                     
+                    <!-- Listen Sample -->
                     <button onclick="listenSample()" id="btn-listen" class="flex flex-col items-center justify-center p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 transition cursor-pointer group" title="Nghe đọc mẫu">
                         <i class="fa-solid fa-volume-high text-xl group-hover:scale-110 transition"></i>
                         <span class="text-xs font-bold mt-1">Nghe mẫu</span>
                     </button>
 
+                    <!-- Practice (Mic) -->
                     <button onclick="toggleRecognition()" id="btn-mic" class="flex flex-col items-center justify-center p-4 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-md shadow-red-200 transition transform hover:scale-105 cursor-pointer relative" style="width: 70px; height: 70px; margin: 0 auto; top: -15px;">
                         <i id="mic-icon" class="fa-solid fa-microphone text-2xl"></i>
                         <span id="mic-text" class="absolute -bottom-6 text-xs font-bold text-slate-600 w-24 text-center">Bắt đầu nói</span>
                     </button>
 
+                    <!-- Playback Voice -->
                     <button onclick="playbackVoice()" id="btn-playback" disabled class="flex flex-col items-center justify-center p-3 bg-slate-50 text-slate-400 rounded-xl transition opacity-50 cursor-not-allowed group" title="Nghe lại giọng của bạn">
                         <i class="fa-solid fa-reply text-xl group-hover:scale-110 transition"></i>
                         <span class="text-xs font-bold mt-1">Nghe lại mình</span>
@@ -90,35 +105,37 @@
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="text-center py-4 text-xs text-slate-400 border-t border-slate-200 bg-white mt-6">
         © 2026 Luyện Phát Âm Tiếng Anh Mỹ - Global Success 11
     </footer>
 
+    <!-- Script Application Logic -->
     <script>
-        // 1. Data Vocabulary - Đã bổ sung thêm trường ipa chuẩn Anh-Mỹ
+        // 1. Data Vocabulary - Đã cập nhật ĐẦY ĐỦ hình ảnh chất lượng cao riêng biệt cho tất cả 17 từ
         const vocabulary = [
-            // Từ gốc trong SGK
-            { word: "longevity", ipa: "/lɑːnˈdʒev.ə.t̬i/", meaning: "tuổi thọ", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1573341381251-c06886e0007b?q=80&w=400" },
-            { word: "immune system", ipa: "/ɪˈmjuːn ˌsɪs.təm/", meaning: "hệ miễn dịch", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400" },
-            { word: "infectious disease", ipa: "/ɪnˈfek.ʃəs dɪˈziːz/", meaning: "bệnh truyền nhiễm", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=400" },
-            { word: "preservative", ipa: "/prɪˈzɜːr.və.t̬ɪv/", meaning: "chất bảo quản", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1589110190184-e90218f08149?q=80&w=400" },
-            { word: "disinfectant", ipa: "/ˌdɪs.ɪnˈfek.tənt/", meaning: "chất khử trùng", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1584483766114-2ace6ffd65c9?q=80&w=400" },
+            // Từ gốc trong SGK (5 từ)
+            { word: "longevity", ipa: "/lɑːnˈdʒev.ə.t̬i/", meaning: "tuổi thọ", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1543333995-a78aea2eee52?q=80&w=500" },
+            { word: "immune system", ipa: "/ɪˈmjuːn ˌsɪs.təm/", meaning: "hệ miễn dịch", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=500" },
+            { word: "infectious disease", ipa: "/ɪnˈfek.ʃəs dɪˈziːz/", meaning: "bệnh truyền nhiễm", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=500" },
+            { word: "preservative", ipa: "/prɪˈzɜːr.və.t̬ɪv/", meaning: "chất bảo quản", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1622484211148-717098e912e6?q=80&w=500" },
+            { word: "disinfectant", ipa: "/ˌdɪs.ɪnˈfek.tənt/", meaning: "chất khử trùng", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1584483766114-2ace6ffd65c9?q=80&w=500" },
             
             // 7 Từ DỄ bổ sung thêm
-            { word: "healthy", ipa: "/ˈhel.θi/", meaning: "khỏe mạnh", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1490645935467-78da621fd28b?q=80&w=400" },
-            { word: "fitness", ipa: "/ˈfɪt.nəs/", meaning: "sự cân đối, sung sức", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=400" },
-            { word: "exercise", ipa: "/ˈek.sɚ.saɪz/", meaning: "tập thể dục", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=400" },
-            { word: "energy", ipa: "/ˈen.ɚ.dʒi/", meaning: "năng lượng", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=400" },
-            { word: "diet", ipa: "/ˈdaɪ.ət/", meaning: "chế độ ăn uống", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=400" },
-            { word: "sleep", ipa: "/sliːp/", meaning: "giấc ngủ", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1520206183501-b80af970d22f?q=80&w=400" },
-            { word: "active", ipa: "/ˈæk.tɪv/", meaning: "năng động", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=400" },
+            { word: "healthy", ipa: "/ˈhel.θi/", meaning: "khỏe mạnh", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1490645935467-78da621fd28b?q=80&w=500" },
+            { word: "fitness", ipa: "/ˈfɪt.nəs/", meaning: "sự cân đối, sung sức", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=500" },
+            { word: "exercise", ipa: "/ˈek.sɚ.saɪz/", meaning: "tập thể dục", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=500" },
+            { word: "energy", ipa: "/ˈen.ɚ.dʒi/", meaning: "năng lượng", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=500" },
+            { word: "diet", ipa: "/ˈdaɪ.ət/", meaning: "chế độ ăn uống", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=500" },
+            { word: "sleep", ipa: "/sliːp/", meaning: "giấc ngủ", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1511295742364-927943f308ee?q=80&w=500" },
+            { word: "active", ipa: "/ˈæk.tɪv/", meaning: "năng động", difficulty: "easy", imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=500" },
             
             // 5 Từ KHÓ bổ sung thêm
-            { word: "nutritious", ipa: "/nuːˈtrɪʃ.əs/", meaning: "giàu dinh dưỡng", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400" },
-            { word: "life expectancy", ipa: "/ˈlaɪf ɪkˌspek.tən.si/", meaning: "tuổi thọ dự tính", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?q=80&w=400" },
-            { word: "bacteria", ipa: "/bækˈtɪr.i.ə/", meaning: "vi khuẩn", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=400" },
-            { word: "treatment", ipa: "/ˈtriːt.mənt/", meaning: "sự điều trị", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba969eb?q=80&w=400" },
-            { word: "organism", ipa: "/ˈɔːr.ɡən.ɪ.zəm/", meaning: "sinh vật, cơ thể", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1628114674068-120042459424?q=80&w=400" }
+            { word: "nutritious", ipa: "/nuːˈtrɪʃ.əs/", meaning: "giàu dinh dưỡng", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=500" },
+            { word: "life expectancy", ipa: "/ˈlaɪf ɪkˌspek.tən.si/", meaning: "tuổi thọ dự tính", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?q=80&w=500" },
+            { word: "bacteria", ipa: "/bækˈtɪr.i.ə/", meaning: "vi khuẩn", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1608220179550-e24ac053c40f?q=80&w=500" },
+            { word: "treatment", ipa: "/ˈtriːt.mənt/", meaning: "sự điều trị", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?q=80&w=500" },
+            { word: "organism", ipa: "/ˈɔːr.ɡən.ɪ.zəm/", meaning: "sinh vật, cơ thể", difficulty: "hard", imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9d39d6618?q=80&w=500" }
         ];
 
         let currentWordIndex = 0;
@@ -228,7 +245,7 @@
             const target = vocabulary[index];
             
             document.getElementById('current-word').innerText = target.word;
-            document.getElementById('current-ipa').innerText = target.ipa; // Thêm hiển thị phiên âm ở khung học chính
+            document.getElementById('current-ipa').innerText = target.ipa;
             document.getElementById('current-meaning').innerText = target.meaning;
             
             // Set Difficulty Badge
@@ -460,3 +477,4 @@
     </script>
 </body>
 </html>
+
