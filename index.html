@@ -1,352 +1,423 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học Phát Âm: A Long and Healthy Life</title>
-    <style>
-        :root {
-            --primary: #2ecc71;
-            --secondary: #3498db;
-            --danger: #e74c3c;
-            --dark: #2c3e50;
-            --light: #f8f9fa;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #eef2f3;
-            margin: 0;
-            padding: 20px;
-            color: var(--dark);
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        p.subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-        }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-        .tab-btn {
-            padding: 10px 20px;
-            border: none;
-            background: #ddd;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-        .word-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .word-card {
-            background: var(--light);
-            padding: 15px;
-            text-align: center;
-            border-radius: 10px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: 0.2s;
-        }
-        .word-card:hover, .word-card.active {
-            border-color: var(--secondary);
-            background: #e8f4fd;
-        }
-        .word-card h3 {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-        .practice-zone {
-            border: 2px dashed #bdc3c7;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            background: #fafafa;
-        }
-        .word-image {
-            width: 100%;
-            max-width: 300px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        .current-word {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--dark);
-            margin: 10px 0;
-        }
-        .ipa {
-            font-size: 1.1rem;
-            color: #7f8c8d;
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-        .meaning {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 20px;
-        }
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        button.action-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1rem;
-            transition: 0.2s;
-        }
-        .btn-listen { background: #34495e; color: white; }
-        .btn-slow { background: #f39c12; color: white; }
-        .btn-speak { background: var(--primary); color: white; }
-        .btn-speak.recording { background: var(--danger); animation: pulse 1.5s infinite; }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            display: none;
-        }
-        .success { background: #d4edda; color: #155724; }
-        .fail { background: #f8d7da; color: #721c24; }
-    </style>
+    <title>Luyện Phát Âm Tiếng Anh 11 - A Long and Healthy Life</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-slate-50 font-sans min-h-screen flex flex-col">
 
-<div class="container">
-    <h1>A Long and Healthy Life</h1>
-    <p class="subtitle">Ứng dụng luyện phát âm Tiếng Anh 11 - Global Success (Chuẩn Mỹ)</p>
+    <header class="bg-blue-600 text-white py-6 shadow-md text-center">
+        <h1 class="text-2xl md:text-3xl font-bold tracking-wide">ENGLISH PRONUNCIATION PRACTICE</h1>
+        <p class="text-blue-100 mt-1">Unit 1: A Long and Healthy Life (Global Success 11)</p>
+    </header>
 
-    <div class="tabs">
-        <button class="tab-btn active" onclick="filterWords('all')">Tất Cả</button>
-        <button class="tab-btn" onclick="filterWords('easy')">Từ Dễ (7 từ)</button>
-        <button class="tab-btn" onclick="filterWords('hard')">Từ Khó (10 từ)</button>
-    </div>
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 flex flex-col h-[600px]">
+            <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-book text-blue-500"></i> Danh sách từ vựng
+            </h2>
+            
+            <div class="flex gap-2 mb-4 bg-slate-100 p-1 rounded-xl text-sm font-medium">
+                <button onclick="filterWords('all')" id="btn-all" class="flex-1 py-2 rounded-lg text-center bg-white text-blue-600 shadow-xs cursor-pointer">Tất cả</button>
+                <button onclick="filterWords('easy')" id="btn-easy" class="flex-1 py-2 rounded-lg text-center text-slate-600 hover:text-slate-800 cursor-pointer">Dễ</button>
+                <button onclick="filterWords('hard')" id="btn-hard" class="flex-1 py-2 rounded-lg text-center text-slate-600 hover:text-slate-800 cursor-pointer">Khó</button>
+            </div>
 
-    <div class="word-grid" id="wordGrid"></div>
-
-    <div class="practice-zone" id="practiceZone" style="display: none;">
-        <img id="vocabImage" class="word-image" src="" alt="Hình minh họa">
-        <div class="current-word" id="vocabWord"></div>
-        <div class="ipa" id="vocabIpa"></div>
-        <div class="meaning" id="vocabMeaning"></div>
-
-        <div class="btn-group">
-            <button class="action-btn btn-listen" onclick="speak(1)">🔊 Nghe Đọc Trước</button>
-            <button class="action-btn btn-slow" onclick="speak(0.6)">🐢 Đọc Chậm</button>
-            <button class="action-btn btn-speak" id="btnSpeak" onclick="startRecognition()">🎙️ Bắt Đầu Nói</button>
+            <div id="word-list" class="flex-1 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
+                </div>
         </div>
 
-        <div class="result-box" id="resultBox"></div>
-    </div>
-</div>
+        <div class="md:col-span-2 bg-white rounded-2xl shadow-sm p-6 border border-slate-100 flex flex-col justify-between min-h-[500px]">
+            
+            <div class="text-center flex-1 flex flex-col items-center justify-center my-4">
+                <span id="word-difficulty" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3"></span>
+                <h2 id="current-word" class="text-4xl md:text-5xl font-black text-slate-800 tracking-tight mb-1">Select a word</h2>
+                <p id="current-meaning" class="text-slate-500 italic text-lg mb-4"></p>
+                
+                <div class="w-48 h-32 md:w-64 md:h-40 rounded-xl overflow-hidden bg-slate-100 shadow-inner mb-6 flex items-center justify-center border border-slate-200">
+                    <img id="word-image" src="" alt="Vocabulary illustration" class="w-full h-full object-cover hidden">
+                    <i id="image-placeholder" class="fa-regular fa-image text-4xl text-slate-300"></i>
+                </div>
+            </div>
 
-<script>
-    // Danh sách từ vựng theo yêu cầu của bạn
-    const wordList = [
-        // 5 Từ gốc của bạn (Xếp vào nhóm Khó do âm tiết dài/phức tạp)
-        { word: "longevity", ipa: "/lɑːnˈdʒev.ə.t̬i/", meaning: "Tuổi thọ", level: "hard", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" },
-        { word: "immune system", ipa: "/ɪˈmjuːn ˌsɪs.təm/", meaning: "Hệ miễn dịch", level: "hard", img: "https://images.unsplash.com/photo-1584036561566-baf241f8024a?w=400" },
-        { word: "infectious disease", ipa: "/ɪnˈfek.ʃəs dɪˈziːz/", meaning: "Bệnh truyền nhiễm", level: "hard", img: "https://images.unsplash.com/photo-1584118624012-df056829fba0?w=400" },
-        { word: "preservative", ipa: "/prɪˈzɜːr.və.t̬ɪv/", meaning: "Chất bảo quản", level: "hard", img: "https://images.unsplash.com/photo-1547514701-42782101795e?w=400" },
-        { word: "disinfectant", ipa: "/ˌdɪs.ɪnˈfek.tənt/", meaning: "Chất khử trùng", level: "hard", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" },
+            <div class="text-center mb-6">
+                <div id="score-container" class="hidden inline-flex flex-col items-center">
+                    <div id="score-circle" class="w-24 h-24 rounded-full border-4 flex items-center justify-center text-3xl font-black mb-2 animate-bounce">
+                        <span id="score-text">0%</span>
+                    </div>
+                    <p id="feedback-text" class="text-sm font-semibold"></p>
+                    <p id="speech-transcript" class="text-xs text-slate-400 mt-1 italic"></p>
+                </div>
+            </div>
 
-        // Thêm 7 từ DỄ (Chủ đề Sức khỏe, từ ngắn, dễ phát âm)
-        { word: "health", ipa: "/helθ/", meaning: "Sức khỏe", level: "easy", img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400" },
-        { word: "fitness", ipa: "/ˈfɪt.nəs/", meaning: "Sự sung sức, cân đối", level: "easy", img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400" },
-        { word: "diet", ipa: "/ˈdaɪ.ət/", meaning: "Chế độ ăn uống", level: "easy", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400" },
-        { word: "exercise", ipa: "/ˈek.sɚ.saɪz/", meaning: "Tập thể dục", level: "easy", img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400" },
-        { word: "sleep", ipa: "/sliːp/", meaning: "Giấc ngủ", level: "easy", img: "https://images.unsplash.com/photo-1511295742364-92b9345f6852?w=400" },
-        { word: "germ", ipa: "/dʒɜːrm/", meaning: "Vi khuẩn, mầm bệnh", level: "easy", img: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400" },
-        { word: "active", ipa: "/ˈæk.tɪv/", meaning: "Tích cực, hoạt động", level: "easy", img: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400" },
+            <div class="border-t border-slate-100 pt-6">
+                <div class="grid grid-cols-3 gap-4 max-w-md mx-auto">
+                    
+                    <button onclick="listenSample()" id="btn-listen" class="flex flex-col items-center justify-center p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 transition cursor-pointer group" title="Nghe đọc mẫu">
+                        <i class="fa-solid fa-volume-high text-xl group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-bold mt-1">Nghe mẫu</span>
+                    </button>
 
-        // Thêm 5 từ KHÓ (Từ vựng nâng cao trong bài học)
-        { word: "life expectancy", ipa: "/ˈlaɪf ɪkˌspek.tən.si/", meaning: "Tuổi thọ dự tính", level: "hard", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400" },
-        { word: "nutritious", ipa: "/nuːˈtrɪʃ.əs/", meaning: "Bổ dưỡng, giàu dinh dưỡng", level: "hard", img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400" },
-        { word: "antibiotics", ipa: "/ˌæn.t̬i.baɪˈɑː.t̬ɪks/", meaning: "Thuốc kháng sinh", level: "hard", img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400" },
-        { word: "treatment", ipa: "/ˈtriːt.mənt/", meaning: "Liệu trình điều trị", level: "hard", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400" },
-        { word: "vaccine", ipa: "/vækˈsiːn/", meaning: "Vắc-xin", level: "hard", img: "https://images.unsplash.com/photo-1618961734760-466979ce35b0?w=400" }
-    ];
+                    <button onclick="toggleRecognition()" id="btn-mic" class="flex flex-col items-center justify-center p-4 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-md shadow-red-200 transition transform hover:scale-105 cursor-pointer relative" style="width: 70px; height: 70px; margin: 0 auto; top: -15px;">
+                        <i id="mic-icon" class="fa-solid fa-microphone text-2xl"></i>
+                        <span id="mic-text" class="absolute -bottom-6 text-xs font-bold text-slate-600 w-24 text-center">Bắt đầu nói</span>
+                    </button>
 
-    let currentSelectedWord = null;
+                    <button onclick="playbackVoice()" id="btn-playback" disabled class="flex flex-col items-center justify-center p-3 bg-slate-50 text-slate-400 rounded-xl transition opacity-50 cursor-not-allowed group" title="Nghe lại giọng của bạn">
+                        <i class="fa-solid fa-reply text-xl group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-bold mt-1">Nghe lại mình</span>
+                    </button>
+                    
+                </div>
+            </div>
 
-    // Hiển thị danh sách từ vựng lên màn hình
-    function displayWords(filter = "all") {
-        const grid = document.getElementById("wordGrid");
-        grid.innerHTML = "";
-        
-        wordList.forEach((item) => {
-            if (filter !== "all" && item.level !== filter) return;
+        </div>
+    </main>
 
-            const card = document.createElement("div");
-            card.className = "word-card";
-            card.onclick = () => selectWord(item, card);
-            card.innerHTML = `
-                <h3>${item.word}</h3>
-                <small style="color:${item.level === 'easy' ? '#2ecc71':'#e74c3c'}">
-                    ${item.level === 'easy' ? '🟢 Dễ' : '🔴 Khó'}
-                </small>
-            `;
-            grid.appendChild(card);
-        });
-    }
+    <footer class="text-center py-4 text-xs text-slate-400 border-t border-slate-200 bg-white mt-6">
+        © 2026 Luyện Phát Âm Tiếng Anh Mỹ - Global Success 11
+    </footer>
 
-    // Lọc từ vựng theo Tab
-    function filterWords(level) {
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-        displayWords(level);
-        document.getElementById("practiceZone").style.display = "none";
-    }
+    <script>
+        // 1. Data Vocabulary (Sách giáo khoa + Bổ sung thêm 7 từ dễ, 5 từ khó)
+        const vocabulary = [
+            // Từ gốc trong SGK
+            { word: "longevity", meaning: "tuổi thọ", difficulty: "hard", keyword: "old age longevity" },
+            { word: "immune system", meaning: "hệ miễn dịch", difficulty: "hard", keyword: "immune system cell" },
+            { word: "infectious disease", meaning: "bệnh truyền nhiễm", difficulty: "hard", keyword: "virus virus" },
+            { word: "preservative", meaning: "chất bảo quản", difficulty: "hard", keyword: "canned food canned" },
+            { word: "disinfectant", meaning: "chất khử trùng", difficulty: "hard", keyword: "antiseptic alcohol" },
+            
+            // 7 Từ DỄ bổ sung thêm (Chủ đề sức khỏe)
+            { word: "healthy", meaning: "khỏe mạnh", difficulty: "easy", keyword: "healthy lifestyle fitness" },
+            { word: "fitness", meaning: "sự cân đối, sung sức", difficulty: "easy", keyword: "fitness workout gym" },
+            { word: "exercise", meaning: "tập thể dục", difficulty: "easy", keyword: "running exercise" },
+            { word: "energy", meaning: "năng lượng", difficulty: "easy", keyword: "energy active running" },
+            { word: "diet", meaning: "chế độ ăn uống", difficulty: "easy", keyword: "diet salad food" },
+            { word: "sleep", meaning: "giấc ngủ", difficulty: "easy", keyword: "sleeping bed" },
+            { word: "active", meaning: "năng động", difficulty: "easy", keyword: "active outdoor sport" },
 
-    // Chọn từ để luyện tập
-    function selectWord(item, cardElement) {
-        document.querySelectorAll('.word-card').forEach(c => c.classList.remove('active'));
-        cardElement.classList.add('active');
+            // 5 Từ KHÓ bổ sung thêm (Chủ đề sức khỏe nâng cao)
+            { word: "nutritious", meaning: "giàu dinh dưỡng", difficulty: "hard", keyword: "nutritious meal vegetable" },
+            { word: "life expectancy", meaning: "tuổi thọ dự tính", difficulty: "hard", keyword: "elderly happy life" },
+            { word: "bacteria", meaning: "vi khuẩn", difficulty: "hard", keyword: "microscope bacteria" },
+            { word: "treatment", meaning: "sự điều trị", difficulty: "hard", keyword: "hospital treatment doctor" },
+            { word: "organism", meaning: "sinh vật, cơ thể", difficulty: "hard", keyword: "organism cell nature" }
+        ];
 
-        currentSelectedWord = item;
-        document.getElementById("practiceZone").style.display = "block";
-        document.getElementById("vocabImage").src = item.img;
-        document.getElementById("vocabWord").innerText = item.word;
-        document.getElementById("vocabIpa").innerText = item.ipa;
-        document.getElementById("vocabMeaning").innerText = `Ý nghĩa: ${item.meaning}`;
-        
-        // Ẩn hộp kết quả cũ
-        const resultBox = document.getElementById("resultBox");
-        resultBox.style.display = "none";
-    }
+        let currentWordIndex = 0;
+        let filteredWords = [...vocabulary];
+        let mediaRecorder;
+        let audioChunks = [];
+        let audioUrl = null;
+        let recognition;
+        let isRecordingInstance = false;
 
-    // Tính năng Đọc mẫu (SpeechSynthesis) chuẩn giọng Mỹ (en-US)
-    function speak(speed = 1) {
-        if (!currentSelectedWord) return;
-        
-        // Xóa các giọng đang đọc dở (nếu có)
-        window.speechSynthesis.cancel();
-
-        const utterance = new SpeechSynthesisUtterance(currentSelectedWord.word);
-        utterance.lang = 'en-US'; // Thiết lập chuẩn giọng Anh-Mỹ
-        utterance.rate = speed;   // Tốc độ đọc
-
-        window.speechSynthesis.speak(utterance);
-    }
-
-    // Tính năng Nhận diện và chấm điểm phát âm (Web Speech API)
-    function startRecognition() {
-        if (!currentSelectedWord) return;
-
+        // Init Speech Recognition API
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SpeechRecognition) {
-            alert("Trình duyệt của bạn không hỗ trợ nhận diện giọng nói. Hãy dùng Google Chrome!");
-            return;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = 'en-US'; // Chuẩn giọng Anh - Mỹ
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = () => {
+                isRecordingInstance = true;
+                updateMicUI(true);
+                startAudioRecording(); // Ghi âm đồng thời để nghe lại
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error", event.error);
+                stopAudioRecording(false);
+                updateMicUI(false);
+                alert("Không nhận diện được giọng nói. Vui lòng kiểm tra Micro hoặc thử lại!");
+            };
+
+            recognition.onend = () => {
+                isRecordingInstance = false;
+                updateMicUI(false);
+            };
+
+            recognition.onresult = (event) => {
+                stopAudioRecording(true);
+                const resultText = event.results[0][0].transcript.toLowerCase().trim();
+                calculateScore(resultText);
+            };
+        } else {
+            alert("Trình duyệt của bạn không hỗ trợ Web Speech API. Hãy sử dụng Google Chrome hoặc MS Edge mới nhất!");
         }
 
-        const recognition = new SpeechRecognition();
-        recognition.lang = 'en-US'; // Nhận diện chuẩn giọng Mỹ
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
+        // 2. Render & UI Functions
+        function initApp() {
+            renderWordList();
+            selectWord(0);
+            initMediaRecorder();
+        }
 
-        const btnSpeak = document.getElementById("btnSpeak");
-        const resultBox = document.getElementById("resultBox");
-
-        btnSpeak.innerText = "🎤 Đang lắng nghe...";
-        btnSpeak.classList.add("recording");
-        resultBox.style.display = "none";
-
-        recognition.start();
-
-        recognition.onresult = function(event) {
-            // Lấy từ ngữ hệ thống nghe được từ bạn và chuyển thành chữ thường
-            const spokenText = event.results[0][0].transcript.toLowerCase().trim();
-            const targetWord = currentSelectedWord.word.toLowerCase().trim();
+        function renderWordList() {
+            const listContainer = document.getElementById('word-list');
+            listContainer.innerHTML = '';
             
-            resultBox.style.display = "block";
+            filteredWords.forEach((item, index) => {
+                const isSelected = vocabulary[currentWordIndex].word === item.word;
+                const diffColor = item.difficulty === 'easy' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700';
+                
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-xl border transition cursor-pointer flex justify-between items-center ${isSelected ? 'border-blue-500 bg-blue-50/50 shadow-xs' : 'border-slate-100 hover:bg-slate-50'}`;
+                card.onclick = () => {
+                    const originalIndex = vocabulary.findIndex(v => v.word === item.word);
+                    selectWord(originalIndex);
+                };
 
-            // Thuật toán chấm điểm đơn giản: so khớp trực tiếp chuỗi ký tự
-            if (spokenText === targetWord) {
-                resultBox.className = "result-box success";
-                resultBox.innerHTML = `💯 Điểm: 100/100<br>Tuyệt vời! Bạn phát âm chính xác: "<strong>${event.results[0][0].transcript}</strong>"`;
-            } else {
-                // Nếu sai, tính toán tỷ lệ tương đồng ký tự cơ bản để chấm điểm
-                let score = calculateSimilarity(targetWord, spokenText);
-                if (score > 60) {
-                    resultBox.className = "result-box success";
-                    resultBox.innerHTML = `⭐ Điểm: ${score}/100<br>Khá tốt! Bạn nói: "<strong>${event.results[0][0].transcript}</strong>"`;
+                card.innerHTML = `
+                    <div>
+                        <div class="font-bold text-slate-800 text-base">${item.word}</div>
+                        <div class="text-xs text-slate-500">${item.meaning}</div>
+                    </div>
+                    <span class="text-[10px] px-2 py-0.5 rounded-md font-bold uppercase ${diffColor}">${item.difficulty}</span>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        function filterWords(type) {
+            // Update Tab active UI
+            ['all', 'easy', 'hard'].forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                if(t === type) {
+                    btn.className = "flex-1 py-2 rounded-lg text-center bg-white text-blue-600 shadow-xs font-semibold cursor-pointer";
                 } else {
-                    resultBox.className = "result-box fail";
-                    resultBox.innerHTML = `❌ Điểm: ${score}/100<br>Chưa chính xác. Máy nghe thành: "<strong>${event.results[0][0].transcript}</strong>". Bạn hãy thử nhấn "Đọc chậm nghe kĩ" rồi thử lại nhé!`;
+                    btn.className = "flex-1 py-2 rounded-lg text-center text-slate-600 hover:text-slate-800 cursor-pointer";
+                }
+            });
+
+            if (type === 'all') {
+                filteredWords = [...vocabulary];
+            } else {
+                filteredWords = vocabulary.filter(w => w.difficulty === type);
+            }
+            renderWordList();
+            if(filteredWords.length > 0) {
+                const originalIndex = vocabulary.findIndex(v => v.word === filteredWords[0].word);
+                selectWord(originalIndex);
+            }
+        }
+
+        function selectWord(index) {
+            currentWordIndex = index;
+            const target = vocabulary[index];
+            
+            document.getElementById('current-word').innerText = target.word;
+            document.getElementById('current-meaning').innerText = target.meaning;
+            
+            // Set Difficulty Badge
+            const diffBadge = document.getElementById('word-difficulty');
+            diffBadge.innerText = target.difficulty;
+            if(target.difficulty === 'easy') {
+                diffBadge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3 bg-green-100 text-green-700";
+            } else {
+                diffBadge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3 bg-amber-100 text-amber-700";
+            }
+
+            // Load Illustration Image dynamically
+            const imgEl = document.getElementById('word-image');
+            const placeholderEl = document.getElementById('image-placeholder');
+            imgEl.classList.add('hidden');
+            placeholderEl.classList.remove('hidden');
+            
+            // Source ảnh minh họa Unsplash theo từ khóa chủ đề sạch
+            imgEl.src = `https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80&sig=${target.word}`; 
+            // Có thể đổi link ảnh custom theo cấu trúc keyword: `https://source.unsplash.com/featured/400x300/?${encodeURIComponent(target.keyword)}`
+            
+            imgEl.onload = () => {
+                imgEl.classList.remove('hidden');
+                placeholderEl.classList.add('hidden');
+            };
+
+            // Reset Scoring UI & Audio playback
+            document.getElementById('score-container').classList.add('hidden');
+            resetPlayback();
+
+            // Re-render list to match highlight border
+            renderWordList();
+        }
+
+        function updateMicUI(isRecording) {
+            const micBtn = document.getElementById('btn-mic');
+            const micIcon = document.getElementById('mic-icon');
+            const micText = document.getElementById('mic-text');
+
+            if(isRecording) {
+                micBtn.className = "flex flex-col items-center justify-center p-4 bg-red-600 text-white rounded-full shadow-lg shadow-red-300 ring-4 ring-red-200 animate-pulse cursor-pointer relative";
+                micIcon.className = "fa-solid fa-stop text-2xl";
+                micText.innerText = "Đang ghi âm...";
+                micText.classList.add("text-red-600");
+            } else {
+                micBtn.className = "flex flex-col items-center justify-center p-4 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-md shadow-red-200 transition transform hover:scale-105 cursor-pointer relative";
+                micIcon.className = "fa-solid fa-microphone text-2xl";
+                micText.innerText = "Bắt đầu nói";
+                micText.classList.remove("text-red-600");
+            }
+            micBtn.style.width = "70px";
+            micBtn.style.height = "70px";
+            micBtn.style.margin = "0 auto";
+            micBtn.style.top = "-15px";
+        }
+
+        // 3. Audio & Voice Operations
+        function listenSample() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Ngắt âm đang phát nếu có
+                const text = vocabulary[currentWordIndex].word;
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Cố gắng tìm giọng chuẩn Anh - Mỹ (en-US)
+                const voices = window.speechSynthesis.getVoices();
+                const usVoice = voices.find(voice => voice.lang.includes('en-US'));
+                if (usVoice) utterance.voice = usVoice;
+                
+                utterance.rate = 0.85; // Đọc hơi chậm một chút để học sinh dễ nghe
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Trình duyệt của bạn không hỗ trợ phát âm mẫu.");
+            }
+        }
+
+        function toggleRecognition() {
+            if (isRecordingInstance) {
+                recognition.stop();
+            } else {
+                if(recognition) {
+                    resetPlayback();
+                    recognition.start();
                 }
             }
-        };
-
-        recognition.onspeechend = function() {
-            recognition.stop();
-            btnSpeak.innerText = "🎙️ Bắt Đầu Nói";
-            btnSpeak.classList.remove("recording");
-        };
-
-        recognition.onerror = function(event) {
-            btnSpeak.innerText = "🎙️ Bắt Đầu Nói";
-            btnSpeak.classList.remove("recording");
-            alert("Đã xảy ra lỗi nhận diện hoặc không nghe thấy tiếng: " + event.error);
-        };
-    }
-
-    // Hàm bổ trợ tính điểm tương đối dựa trên độ trùng khớp từ ngữ
-    function calculateSimilarity(str1, str2) {
-        let matches = 0;
-        const len = Math.max(str1.length, str2.length);
-        for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
-            if (str1[i] === str2[i]) matches++;
         }
-        return Math.round((matches / len) * 100);
-    }
 
-    // Khởi chạy ứng dụng ban đầu
-    displayWords('all');
-</script>
+        function initMediaRecorder() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = (e) => {
+                        audioChunks.push(e.data);
+                    };
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        audioUrl = URL.createObjectURL(audioBlob);
+                        enablePlayback();
+                    };
+                }).catch(err => {
+                    console.log("Quyền micro bị từ chối hoặc lỗi:", err);
+                });
+            }
+        }
 
+        function startAudioRecording() {
+            if(mediaRecorder && mediaRecorder.state === "inactive") {
+                audioChunks = [];
+                mediaRecorder.start();
+            }
+        }
+
+        function stopAudioRecording(saveData) {
+            if(mediaRecorder && mediaRecorder.state === "recording") {
+                if(!saveData) {
+                    mediaRecorder.onstop = () => {}; // Hủy callback lưu dữ liệu nếu lỗi mic
+                    mediaRecorder.stop();
+                    initMediaRecorder(); // Reset lại thiết bị ghi
+                } else {
+                    mediaRecorder.stop();
+                }
+            }
+        }
+
+        function enablePlayback() {
+            const playBtn = document.getElementById('btn-playback');
+            playBtn.disabled = false;
+            playBtn.className = "flex flex-col items-center justify-center p-3 bg-green-50 text-green-600 rounded-xl hover:bg-green-100 transition cursor-pointer group";
+        }
+
+        function resetPlayback() {
+            const playBtn = document.getElementById('btn-playback');
+            playBtn.disabled = true;
+            playBtn.className = "flex flex-col items-center justify-center p-3 bg-slate-50 text-slate-400 rounded-xl transition opacity-50 cursor-not-allowed group";
+            if(audioUrl) {
+                URL.revokeObjectURL(audioUrl);
+                audioUrl = null;
+            }
+        }
+
+        function playbackVoice() {
+            if(audioUrl) {
+                const audio = new Audio(audioUrl);
+                audio.play();
+            }
+        }
+
+        // 4. Algorithm Chấm điểm thông minh đơn giản
+        function calculateScore(spokenText) {
+            const targetText = vocabulary[currentWordIndex].word.toLowerCase().trim();
+            document.getElementById('speech-transcript').innerText = `Bạn đã nói: "${spokenText}"`;
+
+            let score = 0;
+            if (spokenText === targetText) {
+                score = 100;
+            } else {
+                // Thuật toán so sánh khoảng cách chuỗi cơ bản (Levenshtein hoặc trùng từ ký tự)
+                const maxLength = Math.max(targetText.length, spokenText.length);
+                let matches = 0;
+                for(let i=0; i < Math.min(targetText.length, spokenText.length); i++){
+                    if(targetText[i] === spokenText[i]) matches++;
+                }
+                score = Math.round((matches / maxLength) * 100);
+                
+                // Bonus nếu chứa cụm chính xác
+                if(spokenText.includes(targetText) && score < 70) score = 75;
+            }
+
+            displayScore(score);
+        }
+
+        function displayScore(score) {
+            const scoreContainer = document.getElementById('score-container');
+            const scoreCircle = document.getElementById('score-circle');
+            const scoreText = document.getElementById('score-text');
+            const feedbackText = document.getElementById('feedback-text');
+
+            scoreContainer.classList.remove('hidden');
+            scoreText.innerText = `${score}%`;
+
+            if (score >= 80) {
+                scoreCircle.className = "w-24 h-24 rounded-full border-4 border-green-500 text-green-600 flex items-center justify-center text-3xl font-black mb-2 animate-bounce";
+                feedbackText.innerText = "Excellent! Phát âm rất chuẩn.";
+                feedbackText.className = "text-sm font-semibold text-green-600";
+            } else if (score >= 50) {
+                scoreCircle.className = "w-24 h-24 rounded-full border-4 border-amber-500 text-amber-600 flex items-center justify-center text-3xl font-black mb-2";
+                feedbackText.innerText = "Good! Cố gắng rõ chữ hơn tí nữa.";
+                feedbackText.className = "text-sm font-semibold text-amber-600";
+            } else {
+                scoreCircle.className = "w-24 h-24 rounded-full border-4 border-red-500 text-red-600 flex items-center justify-center text-3xl font-black mb-2";
+                feedbackText.innerText = "Keep trying! Hãy nghe kỹ phát âm mẫu.";
+                feedbackText.className = "text-sm font-semibold text-red-500";
+            }
+        }
+
+        // Chạy ứng dụng khi load xong trang
+        window.onload = () => {
+            initApp();
+            // Cần click nhẹ trên trang để tải danh sách giọng nói speechSynthesis ổn định hơn
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.getVoices();
+            }
+        };
+    </script>
 </body>
 </html>
